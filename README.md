@@ -2,7 +2,7 @@
 
 A simple Java library for creating simple PDFs.
 
-[![Build Status](https://travis-ci.org/stengerh/simple-pdf.svg?branch=master)](https://travis-ci.org/stengerh/simple-pdf)
+[![Build Status](https://travis-ci.org/stengerh/simple-pdf.svg?branch=master)](https://travis-ci.org/stengerh/simple-pdf) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.github.stengerh.simplepdf%3Asimple-pdf&metric=alert_status)](https://sonarcloud.io/dashboard/index/com.github.stengerh.simplepdf:simple-pdf)
 
 ## Features
 
