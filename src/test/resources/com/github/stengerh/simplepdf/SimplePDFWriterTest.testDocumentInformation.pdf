@@ -1,0 +1,73 @@
+%PDF-1.7
+%¥±ë
+1 0 obj <<
+/Title (My Title)
+/Author (Despicable Me)
+/Producer (SimplePDFWriter)
+/CreationDate (D:20180519115223+02'00)
+/ModDate (D:20180519115223-02'15)
+>>
+endobj
+2 0 obj <<
+/Type /Catalog
+/Pages 3 0 R
+>>
+endobj
+3 0 obj <<
+/Type /Pages
+/Kids [
+4 0 R
+]
+/Count 1
+>>
+endobj
+4 0 obj <<
+/Type /Page
+/Parent 3 0 R
+/Resources <<
+/Font <<
+/F1 <<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Times-Roman
+/Encoding /WinAnsiEncoding
+>>
+>>
+>>
+/MediaBox [0 0 595 842]
+/Contents 5 0 R
+>>
+endobj
+5 0 obj <<
+/Length 6 0 R
+>>
+stream
+BT
+/F1 18 Tf
+28 823 Td
+27 TL
+(Hello) '
+(world!) '
+ET
+endstream
+endobj
+6 0 obj
+52
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000017 00000 n 
+0000000181 00000 n 
+0000000230 00000 n 
+0000000289 00000 n 
+0000000493 00000 n 
+0000000598 00000 n 
+trailer <<
+/Root 2 0 R
+/Info 1 0 R
+/Size 7
+>>
+startxref
+616
+%%EOF
