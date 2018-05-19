@@ -1,4 +1,4 @@
-package com.github.stengerh.simplepdf;
+package com.github.stengerh.simplepdfwriter;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -16,7 +16,7 @@ A simple Java library for creating simple PDFs.
  ## Usage
  
  ````.java
-import com.github.stengerh.simplepdf.SimplePDFWriter;
+import com.github.stengerh.simplepdfwriter.SimplePDFWriter;
 
 ...
 

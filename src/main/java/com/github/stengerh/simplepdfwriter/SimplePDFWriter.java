@@ -1,4 +1,4 @@
-package com.github.stengerh.simplepdf;
+package com.github.stengerh.simplepdfwriter;
 
 import java.io.IOException;
 import java.io.OutputStream;
