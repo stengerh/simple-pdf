@@ -148,14 +148,17 @@ public class SimplePDFWriter implements AutoCloseable {
     }
 
     public void println(String s) throws IOException {
-        try (Writer writer = new OutputStreamWriter(out, PDFDocEncoding)) {
-            writer.write("(");
-        }
-        try (Writer writer = new OutputStreamWriter(out, WinAnsiEncoding)) {
-            writer.write(s.replaceAll("[()\\\\]", "\\\\$0"));
-        }
-        try (Writer writer = new OutputStreamWriter(out, PDFDocEncoding)) {
-            writer.write(") '\n");
+        String[] lines = s.split("(\\r?\\n)|\\r");
+        for (String line : lines) {
+            try (Writer writer = new OutputStreamWriter(out, PDFDocEncoding)) {
+                writer.write("(");
+            }
+            try (Writer writer = new OutputStreamWriter(out, WinAnsiEncoding)) {
+                writer.write(line.replaceAll("[()\\\\]", "\\\\$0"));
+            }
+            try (Writer writer = new OutputStreamWriter(out, PDFDocEncoding)) {
+                writer.write(") '\n");
+            }
         }
     }
 

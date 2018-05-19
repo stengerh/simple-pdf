@@ -14,6 +14,8 @@ import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.function.Supplier;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+
 class SimplePDFWriterTest {
 
     private static final Charset CS = Charset.forName("UTF-8");
@@ -41,10 +43,21 @@ class SimplePDFWriterTest {
 
     @Test
     public void testTwoLines() throws IOException {
-        run(pdfWriter -> {
-            pdfWriter.println("Hello");
-            pdfWriter.println("world!");
-        });
+        assertAll(
+                () -> run(pdfWriter -> {
+                    pdfWriter.println("Hello");
+                    pdfWriter.println("world!");
+                }),
+                () -> run(pdfWriter -> {
+                    pdfWriter.println("Hello\r\nworld!");
+                }),
+                () -> run(pdfWriter -> {
+                    pdfWriter.println("Hello\nworld!");
+                }),
+                () -> run(pdfWriter -> {
+                    pdfWriter.println("Hello\rworld!");
+                })
+        );
     }
 
     @Test
