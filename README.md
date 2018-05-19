@@ -2,6 +2,8 @@
 
 A simple Java library for creating simple PDFs.
 
+[![Build Status](https://travis-ci.org/stengerh/simple-pdf.svg?branch=master)](https://travis-ci.org/stengerh/simple-pdf)
+
 ## Features
 
 * Single page with multiple lines of text
