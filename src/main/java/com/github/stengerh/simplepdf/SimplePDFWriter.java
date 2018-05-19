@@ -123,7 +123,7 @@ public class SimplePDFWriter implements AutoCloseable {
             int lly = 0;
             int urx = Math.toIntExact(Math.round(A4_WIDTH_CM / 2.54 * 72));
             int ury = Math.toIntExact(Math.round(A4_HEIGHT_CM / 2.54 * 72));
-            writer.write(String.format("/MediaBox [%d %d %d %d]\n", llx, lly, urx, ury));
+            writer.write("/MediaBox [" + llx + " " + lly + " " + urx + " " + ury + "]\n");
             writer.write("/Contents 5 0 R\n");
             writer.write(">>\n");
             writer.write("endobj\n");
@@ -138,11 +138,11 @@ public class SimplePDFWriter implements AutoCloseable {
             streamStart = this.out.getWritten();
             writer.write("BT\n");
             int fontSize = 18;
-            writer.write(String.format("/F1 %d Tf\n", fontSize));
+            writer.write("/F1 " + fontSize + " Tf\n");
             int margin = 28;
             int lineHeight = fontSize * 3 / 2;
-            writer.write(String.format("%d %d Td\n", margin, ury - margin + lineHeight - fontSize));
-            writer.write(String.format("%d TL\n", lineHeight));
+            writer.write("" + margin + " " + (ury - margin + lineHeight - fontSize) + " Td\n");
+            writer.write("" + lineHeight + " TL\n");
         }
         return streamStart;
     }
@@ -279,6 +279,14 @@ public class SimplePDFWriter implements AutoCloseable {
             synchronized (lock) {
                 out.write(b);
                 written += 1;
+            }
+        }
+
+        @Override
+        public void write(byte[] b, int off, int len) throws IOException {
+            synchronized (lock) {
+                out.write(b, off, len);
+                written += len;
             }
         }
 
