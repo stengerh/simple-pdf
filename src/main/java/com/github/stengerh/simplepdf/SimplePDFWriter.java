@@ -21,8 +21,8 @@ public class SimplePDFWriter implements AutoCloseable {
     private static final double A4_HEIGHT_CM = 29.7;
 
     private final CountingOutputStream out;
-    private final Map<Integer, Integer> xref = new HashMap<>();
-    private final int streamStart;
+    private final Map<Integer, Long> xref = new HashMap<>();
+    private final long streamStart;
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = new DateTimeFormatterBuilder()
             .appendLiteral("D:")
@@ -49,8 +49,8 @@ public class SimplePDFWriter implements AutoCloseable {
         out.close();
     }
 
-    private int writePrefix(Builder builder) throws IOException {
-        int streamStart;
+    private long writePrefix(Builder builder) throws IOException {
+        long streamStart;
         try (Writer writer = new OutputStreamWriter(this.out, PDFDocEncoding)) {
             writer.write("%PDF-1.7\n");
             writer.write("%Â¥Â±Ã«\n");
@@ -163,7 +163,7 @@ public class SimplePDFWriter implements AutoCloseable {
         try (Writer writer = new OutputStreamWriter(out, PDFDocEncoding)) {
             writer.write("ET");
             writer.flush();
-            int streamEnd = out.getWritten();
+            long streamEnd = out.getWritten();
             writer.write("\n");
             writer.write("endstream\n");
             writer.write("endobj\n");
@@ -175,7 +175,7 @@ public class SimplePDFWriter implements AutoCloseable {
             writer.write("endobj\n");
 
             writer.flush();
-            int xrefOffset = out.getWritten();
+            long xrefOffset = out.getWritten();
             writer.write("xref\n");
             writer.write("0 " + (1 + xref.size()) + "\n");
             writer.write("0000000000 65535 f \n");
@@ -268,7 +268,7 @@ public class SimplePDFWriter implements AutoCloseable {
 
         private final OutputStream out;
         private final Object lock = new Object();
-        private int written = 0;
+        private long written = 0;
 
         private CountingOutputStream(OutputStream out) {
             this.out = out;
@@ -290,7 +290,7 @@ public class SimplePDFWriter implements AutoCloseable {
             }
         }
 
-        public int getWritten() {
+        public long getWritten() {
             synchronized (lock) {
                 return written;
             }
