@@ -42,7 +42,7 @@ class SimplePDFWriterTest {
     }
 
     @Test
-    public void testTwoLines() throws IOException {
+    public void testTwoLines() {
         assertAll(
                 () -> run(pdfWriter -> {
                     pdfWriter.println("Hello");
@@ -72,6 +72,16 @@ class SimplePDFWriterTest {
                 pdfWriter -> {
                     pdfWriter.println("Hello");
                     pdfWriter.println("world!");
+                }
+        );
+    }
+
+    @Test
+    public void testHelvetica() throws IOException {
+        run(() -> SimplePDFWriter.builder()
+                        .font(PDFStandardFont.HELVETICA),
+                pdfWriter -> {
+                    pdfWriter.println("Hello world!");
                 }
         );
     }

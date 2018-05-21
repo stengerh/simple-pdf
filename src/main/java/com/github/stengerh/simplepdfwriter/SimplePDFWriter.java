@@ -114,7 +114,8 @@ public class SimplePDFWriter implements AutoCloseable {
             writer.write("/F1 <<\n");
             writer.write("/Type /Font\n");
             writer.write("/Subtype /Type1\n");
-            writer.write("/BaseFont /Times-Roman\n");
+            PDFStandardFont font = (builder.font != null) ? builder.font : PDFStandardFont.TIMES_ROMAN;
+            writer.write("/BaseFont /" + font.getPostScriptName() + "\n");
             writer.write("/Encoding /WinAnsiEncoding\n");
             writer.write(">>\n");
             writer.write(">>\n");
@@ -221,6 +222,7 @@ public class SimplePDFWriter implements AutoCloseable {
         private String producer;
         private OffsetDateTime creationDate;
         private OffsetDateTime modificationDate;
+        private PDFStandardFont font;
 
         public SimplePDFWriter build(OutputStream out) throws IOException {
             return new SimplePDFWriter(out, this);
@@ -263,6 +265,11 @@ public class SimplePDFWriter implements AutoCloseable {
 
         public Builder modificationDate(OffsetDateTime modificationDate) {
             this.modificationDate = modificationDate;
+            return this;
+        }
+
+        public Builder font(PDFStandardFont font) {
+            this.font = font;
             return this;
         }
     }
