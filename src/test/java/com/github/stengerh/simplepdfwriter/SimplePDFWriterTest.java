@@ -77,9 +77,19 @@ class SimplePDFWriterTest {
     }
 
     @Test
-    public void testHelvetica() throws IOException {
+    public void testFont() throws IOException {
         run(() -> SimplePDFWriter.builder()
                         .font(PDFStandardFont.HELVETICA),
+                pdfWriter -> {
+                    pdfWriter.println("Hello world!");
+                }
+        );
+    }
+
+    @Test
+    public void testFontSize() throws IOException {
+        run(() -> SimplePDFWriter.builder()
+                        .fontSize(24),
                 pdfWriter -> {
                     pdfWriter.println("Hello world!");
                 }

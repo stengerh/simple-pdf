@@ -19,6 +19,8 @@ public class SimplePDFWriter implements AutoCloseable {
     private static final Charset WinAnsiEncoding = Charset.forName("windows-1252");
     private static final double A4_WIDTH_CM = 21.0;
     private static final double A4_HEIGHT_CM = 29.7;
+    private static final PDFStandardFont DEFAULT_FONT = PDFStandardFont.TIMES_ROMAN;
+    private static final int DEFAULT_FONT_SIZE = 18;
 
     private final CountingOutputStream out;
     private final Map<Integer, Long> xref = new HashMap<>();
@@ -114,7 +116,7 @@ public class SimplePDFWriter implements AutoCloseable {
             writer.write("/F1 <<\n");
             writer.write("/Type /Font\n");
             writer.write("/Subtype /Type1\n");
-            PDFStandardFont font = (builder.font != null) ? builder.font : PDFStandardFont.TIMES_ROMAN;
+            PDFStandardFont font = (builder.font != null) ? builder.font : DEFAULT_FONT;
             writer.write("/BaseFont /" + font.getPostScriptName() + "\n");
             writer.write("/Encoding /WinAnsiEncoding\n");
             writer.write(">>\n");
@@ -138,7 +140,7 @@ public class SimplePDFWriter implements AutoCloseable {
             writer.flush();
             streamStart = this.out.getWritten();
             writer.write("BT\n");
-            int fontSize = 18;
+            int fontSize = (builder.fontSize != null) ? builder.fontSize : DEFAULT_FONT_SIZE;
             writer.write("/F1 " + fontSize + " Tf\n");
             int margin = 28;
             int lineHeight = fontSize * 3 / 2;
@@ -223,6 +225,7 @@ public class SimplePDFWriter implements AutoCloseable {
         private OffsetDateTime creationDate;
         private OffsetDateTime modificationDate;
         private PDFStandardFont font;
+        private Integer fontSize;
 
         public SimplePDFWriter build(OutputStream out) throws IOException {
             return new SimplePDFWriter(out, this);
@@ -270,6 +273,11 @@ public class SimplePDFWriter implements AutoCloseable {
 
         public Builder font(PDFStandardFont font) {
             this.font = font;
+            return this;
+        }
+
+        public Builder fontSize(int fontSize) {
+            this.fontSize = fontSize;
             return this;
         }
     }
